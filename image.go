@@ -23,13 +23,13 @@ type Image struct {
 }
 
 // Bounds returns the domain for which At returns valid pixels.
-func (m *Image) Bounds() image.Rectangle {
+func (m Image) Bounds() image.Rectangle {
 	f := m.fs[0]
 	return image.Rect(0, 0, f.Width, f.Height)
 }
 
 // ColorModel returns the Image's color model.
-func (m *Image) ColorModel() color.Model {
+func (m Image) ColorModel() color.Model {
 	f := m.fs[0]
 	switch {
 	case f.Depth != 16 && f.Format == FrameGray:
@@ -45,7 +45,7 @@ func (m *Image) ColorModel() color.Model {
 }
 
 // At returns the color of the pixel at (x, y).
-func (m *Image) At(x, y int) color.Color {
+func (m Image) At(x, y int) color.Color {
 	if x < 0 || x >= m.fs[0].Width || y < 0 || y >= m.fs[0].Height {
 		return color.RGBA{}
 	}
